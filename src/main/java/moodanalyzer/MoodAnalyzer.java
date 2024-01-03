@@ -15,24 +15,24 @@ public class MoodAnalyzer {
         this.message = message;
     }
 
-    public String analyzeMood() {
-        try {
-            message = message.toLowerCase();
-
-            String result = "";
-
-            if (message.contains("sad")) {
-                result = SAD_RESULT;
-            } else {
-                result = HAPPY_RESULT;
-            }
-
-            return result;
-        } catch (NullPointerException e) {
-            System.out.println("error");
-            return "HAPPY";
+    public String analyzeMood() throws MoodAnalyzerException {
+        if (this.message == null) {
+            throw new MoodAnalyzerException(MoodAnalyzerExceptionEnum.NullStringException, "String is null");
         }
 
+        if (this.message.isEmpty()) {
+            throw new MoodAnalyzerException(MoodAnalyzerExceptionEnum.EmptyStringException, "String is empty");
+        }
+
+        message = message.toLowerCase();
+
+        String result = "";
+        if (message.contains("sad")) {
+            result = SAD_RESULT;
+        } else {
+            result = HAPPY_RESULT;
+        }
+        return result;
     }
 
 }
