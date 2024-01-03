@@ -16,17 +16,23 @@ public class MoodAnalyzer {
     }
 
     public String analyzeMood() {
-        message = message.toLowerCase();
+        try {
+            message = message.toLowerCase();
 
-        String result = "";
+            String result = "";
 
-        if (message.contains("sad")) {
-            result = SAD_RESULT;
-        } else {
-            result = HAPPY_RESULT;
+            if (message.contains("sad")) {
+                result = SAD_RESULT;
+            } else {
+                result = HAPPY_RESULT;
+            }
+
+            return result;
+        } catch (NullPointerException e) {
+            System.out.println("error");
+            return "HAPPY";
         }
 
-        return result;
     }
 
 }
